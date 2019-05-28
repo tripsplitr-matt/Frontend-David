@@ -30,6 +30,7 @@ class NavBar extends React.Component {
                     <NavLink className='nav-brand' onClick={this.goHome} to={`/`}>Split Trip</NavLink>
                 </div>
                 <div>
+                    <NavLink onClick={this.goHome} to='/'>Home</NavLink>
                     <NavLink onClick={this.swapLinks} to={`/${this.state.navLink}`}>{this.state.logging ? 'Sign Up' : 'Log In'}</NavLink>
                 </div>
           </div>
