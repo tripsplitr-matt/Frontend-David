@@ -12,6 +12,16 @@ class Login extends React.Component {
         }
     }
 
+    handleChanges = e => {
+        e.persist();
+        this.setState(prevState => ({
+            credentials: {
+                ...prevState,
+                [e.target.name]: e.target.value
+            }
+        }))
+    }
+
     render() {
         return(
             <div className='login'>
