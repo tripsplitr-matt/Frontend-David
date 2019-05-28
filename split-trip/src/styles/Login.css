@@ -40,3 +40,7 @@
     height: 20px;
     border: none;
 }
+.login-form a{
+    text-align: center;
+    font-size: 0.7rem;
+}

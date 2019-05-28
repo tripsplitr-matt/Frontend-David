@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import { connect } from 'react-redux'
 import '../../styles/Login.css'
@@ -19,6 +20,7 @@ class Login extends React.Component {
                     <input name='username' value={this.state.credentials.username} placeholder='Username' type='text' required/>
                     <input name='password' value={this.state.credentials.password} placeholder='Password' type='password' required/>
                     <button>Login</button>
+                    <Link to='/sign-up'>Don't have an account? Sign Up</Link>
                 </form>
             </div>
         )
