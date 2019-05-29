@@ -1,39 +1,38 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import UserSettings from './UserSettings'
 
 class NavBar extends React.Component { 
     state = {
-        navLink: 'login',
-        logging: false
+        home: false,
+        loggedIn: false
     }
 
-    swapLinks = () => {
-        this.setState({
-          ...this.state,
-          logging: !this.state.logging,
-          navLink: this.state.logging ? 'login' : 'sign-up'
-        })
-    }
-    
-    goHome = () => {
-        this.setState({
-            ...this.state,
-            navLink: 'login',
-            logging: false
-        })
+    componentDidMount () {
+        if(window.location.pathname === '/dashboard'){
+            this.setState({
+                home: true,
+                loggedIn: true
+            })
+        } else {
+            this.setState({
+                home: false,
+                loggedIn: false
+            })
+        }
     }
 
     render() {
         return(
             <div className='nav-bar'>
                 <div>
-                    <NavLink className='nav-brand' onClick={this.goHome} to={`/`}>Split Trip</NavLink>
+                    <NavLink className='nav-brand' to={this.state.home ? '/dashboard' : '/'}>Split Trip</NavLink>
                 </div>
                 <div>
-                    <NavLink onClick={this.goHome} to='/'>Home</NavLink>
-                    <NavLink onClick={this.swapLinks} to={`/${this.state.navLink}`}>{this.state.logging ? 'Sign Up' : 'Log In'}</NavLink>
+                    <NavLink to={this.state.home ? '/dashboard' : '/'}>Home</NavLink>
+                    {this.state.loggedIn ? <UserSettings {...this.props}/> : <NavLink to='/login'>Log In</NavLink>}
                 </div>
-          </div>
+            </div>
         )
     }
 }

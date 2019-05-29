@@ -1,3 +1,7 @@
+.dashboard {
+    width: 80%;
+    margin: 0 auto;
+}
 .subnavbar {
     display: flex;
     justify-content: space-between;
@@ -14,8 +18,84 @@
     color: #2E5266;
     padding: 18px;
 }
-
+.show a:first-child{
+    margin-left: 5px;
+}
 .subnavbar a:hover{
     color: #9FB1BC;
     background: #2E5266;
+}
+
+.dashboard .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2E5266;
+}
+
+.summary-content {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    position: relative;
+    background: #6E8898;
+    padding: 20px;
+    width: 25%;
+    color: #fff;
+}
+
+.summary-card:hover {
+    width: 30%;
+    font-size: 1.4rem;
+}
+
+.summary-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card:before, .card:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 35px 20px #777;
+  -moz-box-shadow: 0 35px 20px #777;
+  box-shadow: 0 35px 20px #777;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.card:after {
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+.balances {
+    display: flex;
+    justify-content: center;
+}
+
+.user-balance, .trips-balance {
+    position: relative;
+    background: #6E8898;
+    padding: 20px;
+    width: 50%;
+    color: #fff;
 }
