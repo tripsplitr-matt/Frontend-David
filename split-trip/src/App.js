@@ -15,7 +15,7 @@ function App() {
         <Route exact path='/' render={props => <Welcome {...props} />}/>
         <Route path='/login' render={props => <Login {...props} />}/>
         <Route path='/sign-up' render={props => <SignUp {...props} />}/>
-        <PrivateRoute exact path='/dashboard' render={props => <Dashboard {...props} />}/>
+        <Route exact path='/dashboard' render={props => <Dashboard {...props} />}/>
     </Router>
   );
 }

@@ -1,12 +1,21 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import axios from 'axios'
 import Subnavbar from './Subnavbar/Subnavbar'
 import DashboardHome from './DashboardHome/DashboardHome'
 import '../../styles/Dashboard.css'
 
 class Dashboard extends React.Component {
     state = {
+        data: []
+    }
 
+    componentDidMount() {
+        axios.get('https://tripsplitr.herokuapp.com/')
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log)
     }
 
     render(){
