@@ -1,0 +1,21 @@
+.subnavbar {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    background: #9FB1BC;
+    align-items: center;
+    padding: 10px 0;
+    margin: 0 auto;
+    height: 40px;
+    color: #2E5266;
+}
+.subnavbar a {
+    text-decoration: none;
+    color: #2E5266;
+    padding: 18px;
+}
+
+.subnavbar a:hover{
+    color: #9FB1BC;
+    background: #2E5266;
+}
