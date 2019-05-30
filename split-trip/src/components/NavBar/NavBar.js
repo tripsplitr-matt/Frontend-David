@@ -1,40 +1,28 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import UserSettings from './UserSettings'
 
 class NavBar extends React.Component { 
-    state = {
-        home: false,
-        loggedIn: false
-    }
-
-    componentDidMount () {
-        if(window.location.pathname === '/dashboard'){
-            this.setState({
-                home: true,
-                loggedIn: true
-            })
-        } else {
-            this.setState({
-                home: false,
-                loggedIn: false
-            })
-        }
-    }
 
     render() {
         return(
+            console.log(this.props.loggedIn),
             <div className='nav-bar'>
                 <div>
-                    <NavLink className='nav-brand' to={this.state.home ? '/dashboard' : '/'}>Split Trip</NavLink>
+                    <NavLink className='nav-brand' to='/'>TripSplitr</NavLink>
                 </div>
                 <div>
-                    <NavLink to={this.state.home ? '/dashboard' : '/'}>Home</NavLink>
-                    {this.state.loggedIn ? <UserSettings {...this.props}/> : <NavLink to='/login'>Log In</NavLink>}
+                    <NavLink to={this.props.loggedIn ? '/dashboard' : '/'}>{this.props.loggedIn ? 'Dashboard' : 'Home'}</NavLink>
+                    <NavLink to={this.props.loggedIn ? '/' : '/login'}>{this.props.loggedIn ? 'Logout' : 'Log In'}</NavLink>
                 </div>
             </div>
         )
     }
 }
 
-export default NavBar;
+const mapPropsToState = ({ loggedIn }) => ({
+    loggedIn
+})
+
+export default connect(mapPropsToState)(NavBar);

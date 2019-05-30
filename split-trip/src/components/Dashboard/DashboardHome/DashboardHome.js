@@ -26,7 +26,7 @@ const DashboardHome = () => {
                         </ul>
                     </div>
                     <div className='trips-balance card'>
-                        <h3>Trips Balance</h3>
+                        <h3>Trip Balances</h3>
                         <ul>
                             <li>Total Spent</li>
                             <li>Average Spent</li>
@@ -39,4 +39,4 @@ const DashboardHome = () => {
     )
 }
 
-export default DashboardHome
+export default DashboardHome;
