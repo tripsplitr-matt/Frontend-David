@@ -5,11 +5,10 @@
 .subnavbar {
     display: flex;
     justify-content: space-between;
-    width: 30%;
     background: #9FB1BC;
     align-items: center;
     padding: 10px 0;
-    margin: 0 auto;
+    margin: 100px auto 0;
     height: 40px;
     color: #2E5266;
 }
@@ -33,24 +32,24 @@
     color: #2E5266;
 }
 
-.summary-content {
-    margin-top: 5%;
+.subContainer {
     display: flex;
-    justify-content: space-evenly;
+}
+
+.summary-content {
+    display: flex;
+    align-items: flex-start;
     flex-wrap: wrap;
+    width: 70%;
 }
 
 .summary-card {
     position: relative;
     background: #6E8898;
     padding: 20px;
-    width: 25%;
+    width: 35%;
+    margin-right: 60px;
     color: #fff;
-}
-
-.summary-card:hover {
-    width: 30%;
-    font-size: 1.4rem;
 }
 
 .summary-card ul {
@@ -90,12 +89,16 @@
 .balances {
     display: flex;
     justify-content: center;
+    width: 30%;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .user-balance, .trips-balance {
     position: relative;
     background: #6E8898;
     padding: 20px;
-    width: 50%;
+    width: 80%;
+    margin-bottom: 50px;
     color: #fff;
 }

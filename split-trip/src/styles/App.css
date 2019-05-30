@@ -25,6 +25,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px;
     color: #2E5266;
 }
+.nav-bar a:first-child{
+    border-right: 1px solid #2E5266;
+}
 .nav-brand {
     font-size: 1.4rem;
 }

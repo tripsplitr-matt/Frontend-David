@@ -1,6 +1,6 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import axios from 'axios'
+import { Route, withRouter } from 'react-router-dom'
+// import axios from 'axios'
 import Subnavbar from './Subnavbar/Subnavbar'
 import DashboardHome from './DashboardHome/DashboardHome'
 import '../../styles/Dashboard.css'
@@ -10,22 +10,16 @@ class Dashboard extends React.Component {
         data: []
     }
 
-    componentDidMount() {
-        axios.get('https://tripsplitr.herokuapp.com/')
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(err => console.log)
-    }
+
 
     render(){
         return(
             <div className='dashboard'>
                 <Subnavbar />
-                <Route render={props => <DashboardHome {...props}/>}/>
+                <Route exact path='/dashboard'render={props => <DashboardHome {...props}/>}/>
             </div>
         )
     }
 }
 
-export default Dashboard
+export default withRouter(Dashboard);

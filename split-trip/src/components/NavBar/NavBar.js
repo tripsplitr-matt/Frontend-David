@@ -26,10 +26,10 @@ class NavBar extends React.Component {
         return(
             <div className='nav-bar'>
                 <div>
-                    <NavLink className='nav-brand' to={this.state.home ? '/dashboard' : '/'}>Split Trip</NavLink>
+                    <NavLink className='nav-brand' to={this.state.home ? '/dashboard' : '/'}>TripSplitr</NavLink>
                 </div>
                 <div>
-                    <NavLink to={this.state.home ? '/dashboard' : '/'}>Home</NavLink>
+                    <NavLink to={this.state.home ? '/dashboard' : '/'}>{this.state.home ? 'Dashboard' : 'Home'}</NavLink>
                     {this.state.loggedIn ? <UserSettings {...this.props}/> : <NavLink to='/login'>Log In</NavLink>}
                 </div>
             </div>
