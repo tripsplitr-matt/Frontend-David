@@ -3,6 +3,7 @@ import { LOGIN_START, SIGNUP_START, LOGIN_SUCCESS } from "../actions";
 const initialState = {
     loggingIn: false,
     signingUp: false,
+    loggedIn: false,
     token: localStorage.getItem('token'),
     error: ''
 }
@@ -18,6 +19,7 @@ const reducer = (state = initialState, action) => {
             return {
                ...state,
                loggingIn: false,
+               loggedIn: true,
                token: action.payload 
             }
         case SIGNUP_START: 

@@ -20,6 +20,13 @@ export const register = newUser => dispatch => {
     dispatch({ type: SIGNUP_START })
     axios.post('https://tripsplitr.herokuapp.com/auth/register', newUser)
         .then(res => console.log(res))
+        .catch(err => console.log(err))
 }
 
+export const FETCH_DATA_START = 'FETCH_DATA_START'
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS'
+export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
 
+export const getData = () => dispatch => {
+
+}
