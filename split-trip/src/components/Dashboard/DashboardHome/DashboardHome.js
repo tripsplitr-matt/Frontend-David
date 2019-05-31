@@ -3,19 +3,21 @@ import moment from 'moment'
 import SummaryCard from './SummaryCard'
 
 const today = moment().format('MMMM Do YYYY')
+const currentUser = localStorage.getItem('currentUser')
 
-const DashboardHome = () => {
+
+const DashboardHome = props => {
     return (
         <div className='container'>
             <div className='header'>
-                <h2>Welcome, Name</h2>
+                <h2>Welcome, {currentUser}</h2>
                 <h3>{today}</h3>
             </div>
             <div className='subContainer'>
                 <div className='summary-content'>
-                    <SummaryCard />
-                    <SummaryCard />
-                    <SummaryCard />
+                    {props.trips.map(trip => {
+                        return <SummaryCard data={trip}/>
+                    })}
                 </div>
                 <div className='balances'>
                     <div className='user-balance card'>

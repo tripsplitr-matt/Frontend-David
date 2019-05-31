@@ -1,13 +1,20 @@
 import React from 'react'
 import { Route, withRouter } from 'react-router-dom'
-// import axios from 'axios'
+import { connect } from 'react-redux'
+import { getUsers, getTrips, getExpenses } from '../../actions'
 import Subnavbar from './Subnavbar/Subnavbar'
 import DashboardHome from './DashboardHome/DashboardHome'
 import '../../styles/Dashboard.css'
+import NewTrip from './Addnewtrip/NewTrip';
 
 class Dashboard extends React.Component {
-    state = {
-        data: []
+ 
+
+
+    componentDidMount() {
+        this.props.getUsers()
+        this.props.getTrips()
+        this.props.getExpenses()
     }
 
 
@@ -16,10 +23,22 @@ class Dashboard extends React.Component {
         return(
             <div className='dashboard'>
                 <Subnavbar />
-                <Route exact path='/dashboard'render={props => <DashboardHome {...props}/>}/>
+                <DashboardHome 
+                    users={this.props.users}
+                    trips={this.props.trips}
+                    expenses={this.props.expenses}
+                />
+                {/* <Route path='/dashboard/new-trip' render={props => <NewTrip {...props} />} />
+                <Route path='/dashboard/all' render={props => <NewTrip {...props} />} /> */}
             </div>
         )
     }
 }
 
-export default withRouter(Dashboard);
+const mapPropsToState = ({ users, trips, expenses }) => ({
+    users,
+    trips,
+    expenses
+})
+
+export default withRouter(connect(mapPropsToState, { getUsers, getTrips, getExpenses })(Dashboard));

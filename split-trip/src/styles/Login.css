@@ -12,6 +12,8 @@
     display: flex;
     border-radius: 5px;
     flex-direction: column;
+    text-align: center;
+    color: #ffffff;
     justify-content: center;
     padding: 10px;
     height: 250px;
