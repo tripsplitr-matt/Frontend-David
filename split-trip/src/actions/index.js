@@ -35,6 +35,7 @@ export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
 export const FETCH_TRIPS = 'FETCH_TRIPS'
 export const FETCH_EXPENSES = 'FETCH_EXPENSES'
 export const FETCH_USERS = 'FETCH_USERS'
+export const FETCH_COMPLETED_TRIPS = 'FETCH_COMPLETED_TRIPS'
 
 export const getUsers = () => dispatch => {
     dispatch({ type: FETCH_DATA_START})
@@ -55,6 +56,17 @@ export const getTrips = () => dispatch => {
         })
         .catch(err => {
             dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+        })
+}
+
+export const getCompletedTrips = () => dispatch => {
+    dispatch({ type: FETCH_DATA_START})
+    axios.get(`https://tripsplitr.herokuapp.com/trips/complete`)
+        .then(res => {
+            dispatch({ type: FETCH_COMPLETED_TRIPS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.message})
         })
 }
 
@@ -111,5 +123,20 @@ export const updateTrip = trip => dispatch => {
         })
         .catch(err => {
             dispatch({ type: UPDATE_TRIP_FAIL, payload: err.response.message})
+        })
+}
+
+export const ADD_EXPENSE_START = 'ADD_EXPENSE_START'
+export const ADD_EXPENSE_SUCESS = 'ADD_EXPENSE_SUCCESS'
+export const ADD_EXPENSE_FAIL = 'ADD_EXPENSE_FAIL'
+
+export const addExpense = expense => dispatch => {
+    dispatch({ type: ADD_EXPENSE_START })
+    axios.post('https://tripsplitr.herokuapp.com/expenses', expense)
+        .then(res => {
+            dispatch({ type: ADD_EXPENSE_SUCESS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: ADD_EXPENSE_FAIL, payload: err.response.message})
         })
 }
