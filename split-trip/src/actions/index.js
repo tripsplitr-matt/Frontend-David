@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 
 
 export const login = creds => dispatch => {
@@ -24,7 +25,7 @@ export const register = newUser => dispatch => {
     dispatch({ type: SIGNUP_START })
     axios.post('https://tripsplitr.herokuapp.com/auth/register', newUser)
         .then(res => {
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data})
+            dispatch({ type: SIGNUP_SUCCESS, payload: res.data})
         })
         .catch(err => console.log(err))
 }
@@ -37,13 +38,13 @@ export const FETCH_USERS = 'FETCH_USERS'
 
 export const getUsers = () => dispatch => {
     dispatch({ type: FETCH_DATA_START})
-    axios.get(`https://tripsplitr.herokuapp.com/users`, {
-        headers: { Authorization: localStorage.getItem('token')}
-    })
+    axios.get(`https://tripsplitr.herokuapp.com/users`)
         .then(res => {
             dispatch({ type: FETCH_USERS, payload: res.data})
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+        })
 }
 
 export const getTrips = () => dispatch => {
@@ -52,7 +53,9 @@ export const getTrips = () => dispatch => {
         .then(res => {
             dispatch({ type: FETCH_TRIPS, payload: res.data})
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+        })
 }
 
 export const getExpenses = () => dispatch => {
@@ -61,5 +64,52 @@ export const getExpenses = () => dispatch => {
         .then(res => {
             dispatch({ type: FETCH_EXPENSES, payload: res.data})
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+        })
+}
+
+export const ADD_TRIP_START = 'ADD_TRIP_START'
+export const ADD_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
+export const ADD_TRIP_FAIL = 'ADD_TRIP_FAIL'
+
+export const addTrip = newTrip => dispatch => {
+    dispatch({ type: ADD_TRIP_START })
+    axios.post('https://tripsplitr.herokuapp.com/trips', newTrip)
+        .then(res => {
+            dispatch({ type: ADD_TRIP_SUCCESS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: ADD_TRIP_FAIL, payload: err.response.message})
+        })
+}
+
+export const DELETE_TRIP_START = 'ADD_TRIP_START'
+export const DELETE_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
+export const DELETE_TRIP_FAIL = 'ADD_TRIP_FAIL'
+
+export const deleteTrip = id => dispatch => {
+    dispatch({ type: DELETE_TRIP_START })
+    axios.delete(`https://tripsplitr.herokuapp.com/trips/${id}`)
+        .then(res => {
+            dispatch({ type: DELETE_TRIP_SUCCESS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: DELETE_TRIP_FAIL, payload: err.response.message})
+        })
+}
+
+export const UPDATE_TRIP_START = 'ADD_TRIP_START'
+export const UPDATE_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
+export const UPDATE_TRIP_FAIL = 'ADD_TRIP_FAIL'
+
+export const updateTrip = trip => dispatch => {
+    dispatch({ type: UPDATE_TRIP_START })
+    axios.put(`https://tripsplitr.herokuapp.com/trips/${trip.id}`, trip)
+        .then(res => {
+            dispatch({ type: UPDATE_TRIP_SUCCESS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: UPDATE_TRIP_FAIL, payload: err.response.message})
+        })
 }
