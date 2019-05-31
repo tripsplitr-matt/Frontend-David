@@ -1,12 +1,12 @@
 import React from 'react'
 
-const SummaryCard  = () => {
+const SummaryCard  = props => {
     return (
         <div className='summary-card card'>
-            <h3>Trip Name</h3>
+            <h3>{props.data.name}</h3>
             <ul>
-                <li>Dates</li>
-                <li>Cost</li>
+                <li>{props.data.date}</li>
+                {/* <li>Cost</li> */}
             </ul>
         </div>
     )
