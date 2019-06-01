@@ -89,10 +89,12 @@ export const addTrip = newTrip => dispatch => {
     dispatch({ type: ADD_TRIP_START })
     axios.post('https://tripsplitr.herokuapp.com/trips', newTrip)
         .then(res => {
+            console.log(res)
             dispatch({ type: ADD_TRIP_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: ADD_TRIP_FAIL, payload: err.response.message})
+            console.log(err)
+            // dispatch({ type: ADD_TRIP_FAIL, payload: err.response.message})
         })
 }
 
