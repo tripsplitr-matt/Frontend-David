@@ -1,35 +1,67 @@
 import React from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUsers, getTrips, getExpenses } from '../../actions'
 import Subnavbar from './Subnavbar/Subnavbar'
-import DashboardHome from './DashboardHome/DashboardHome'
+import SummaryCard from './SummaryCard'
+import moment from 'moment'
 import '../../styles/Dashboard.css'
-import NewTrip from './Addnewtrip/NewTrip';
+
+
+const today = moment().format('MMMM Do YYYY')
+const currentUser = localStorage.getItem('currentUser')
 
 class Dashboard extends React.Component {
- 
-
 
     componentDidMount() {
         this.props.getUsers()
         this.props.getTrips()
         this.props.getExpenses()
+        console.log(this.props.trips.length)
     }
 
+    displayTrips = () => {
+        if(this.props.trips.length == 0) {
+            return (<h3>Make new trips</h3>)
+        } else {
+            return (this.props.trips.map(trip => {
+                return <SummaryCard data={trip} key={trip.id}/>
+            }))
+        }
+    }
 
-
-    render(){
-        return(
+    render() {
+        console.log(this.props.trips)
+        return (
             <div className='dashboard'>
                 <Subnavbar />
-                <DashboardHome 
-                    users={this.props.users}
-                    trips={this.props.trips}
-                    expenses={this.props.expenses}
-                />
-                {/* <Route path='/dashboard/new-trip' render={props => <NewTrip {...props} />} />
-                <Route path='/dashboard/all' render={props => <NewTrip {...props} />} /> */}
+                <div className='container'>
+                    <div className='header'>
+                        <h2>Welcome, {currentUser}</h2>
+                        <h3>{today}</h3>
+                    </div>
+                    <div className='subContainer'>
+                        <div className='summary-content'>
+                            {this.displayTrips()}
+                        </div>
+                        <div className='balances'>
+                            <div className='user-balance card'>
+                                <h3>User Balances</h3>
+                                <ul>
+                                    <li>Spent</li>
+                                    <li>Received</li>
+                                </ul>
+                            </div>
+                            <div className='trips-balance card'>
+                                <h3>Trip Balances</h3>
+                                <ul>
+                                    <li>Total Spent</li>
+                                    <li>Average Spent</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
