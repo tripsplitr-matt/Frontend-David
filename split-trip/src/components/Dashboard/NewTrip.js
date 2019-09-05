@@ -1,8 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Subnavbar from '../Subnavbar/Subnavbar'
-import { addTrip } from '../../../actions'
+import Subnavbar from './Subnavbar'
+import { addTrip } from '../../store/actions'
 
 
 class NewTrip extends React.Component {

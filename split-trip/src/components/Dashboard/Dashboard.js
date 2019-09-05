@@ -1,12 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getUsers, getTrips, getExpenses } from '../../actions'
-import Subnavbar from './Subnavbar/Subnavbar'
+import { getUsers, getTrips, getExpenses } from '../../store/actions'
+import Subnavbar from './Subnavbar'
 import SummaryCard from './SummaryCard'
 import moment from 'moment'
-import '../../styles/Dashboard.css'
-
 
 const today = moment().format('MMMM Do YYYY')
 const currentUser = localStorage.getItem('currentUser')

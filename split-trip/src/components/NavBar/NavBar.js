@@ -13,7 +13,7 @@ class NavBar extends React.Component {
                     <NavLink className='nav-brand' to='/'>TripSplitr</NavLink>
                 </div>
                 <div>
-                    <NavLink to={this.props.loggedIn ? '/dashboard' : '/'}>{this.props.loggedIn ? 'Dashboard' : 'Home'}</NavLink>
+                    <NavLink to={this.props.loggedIn ? '/dashboard' : '/'}>{this.props.loggedIn ? 'Dashboard' : 'Login'}</NavLink>
                     <NavLink to={this.props.loggedIn ? '/' : '/sign-up'}>{this.props.loggedIn ? 'Logout' : 'Sign Up'}</NavLink>
                 </div>
             </div>

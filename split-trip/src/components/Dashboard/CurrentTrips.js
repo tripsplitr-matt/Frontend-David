@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TripsCard from '../TripsCardViews/TripsCard'
-import Subnavbar from '../Subnavbar/Subnavbar';
+import TripsCard from './TripsCardViews/TripsCard'
+import Subnavbar from './Subnavbar';
 
 class CurrentTrips extends React.Component {
     state = {

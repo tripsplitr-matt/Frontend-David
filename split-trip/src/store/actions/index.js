@@ -10,7 +10,7 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 
 export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
-    axios.post('https://tripsplitr.herokuapp.com/auth/login', creds)
+    return axios.post('https://tripsplitr.herokuapp.com/auth/login', creds)
         .then(res => {
             localStorage.setItem('currentUser', creds.username)
             localStorage.setItem('token', res.data.token);
@@ -23,7 +23,7 @@ export const login = creds => dispatch => {
 
 export const register = newUser => dispatch => {
     dispatch({ type: SIGNUP_START })
-    axios.post('https://tripsplitr.herokuapp.com/auth/register', newUser)
+    return axios.post('https://tripsplitr.herokuapp.com/auth/register', newUser)
         .then(res => {
             dispatch({ type: SIGNUP_SUCCESS, payload: res.data})
         })

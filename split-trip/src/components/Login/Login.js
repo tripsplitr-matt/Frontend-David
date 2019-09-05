@@ -1,16 +1,17 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import Loader from 'react-loader-spinner'
+import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
-import { login } from '../../actions'
-import '../../styles/Login.css'
+import { login } from '../../store/actions'
+import AuthModal from '../Modal/AuthModal'
 
 class Login extends React.Component {
     state = {
         credentials: {
             username: '',
             password: ''
-        }
+        },
+        isOpen: false
     }
 
     handleChanges = e => {
@@ -22,10 +23,15 @@ class Login extends React.Component {
         })
     }
 
-    login = e => {
-        // e.preventDefault();
-        this.props.login(this.state.credentials)  
-        this.props.history.push('/dashboard')
+    login = async(e) => {
+        e.preventDefault();
+        await this.props.login(this.state.credentials)
+        if(this.props.loggedIn) {
+            this.setState({
+                ...this.state,
+                isOpen: true
+            })
+        }
     }
 
     render() {
@@ -35,20 +41,20 @@ class Login extends React.Component {
                     <label>Log In</label>
                     <input name='username' onChange={this.handleChanges} value={this.state.credentials.username} placeholder='Username' type='text' required/>
                     <input name='password' onChange={this.handleChanges} value={this.state.credentials.password} placeholder='Password' type='password' required/>
-                    <button>
-                    {this.props.loggingIn ? (<Loader type='ThreeDots' color='#1f2a38' height='12' width='26' />) : ('Login')}
-                    </button>
+                    {this.props.loggingIn ? (<Spinner color='primary' className='spinner' />) : (<button>Login</button>)}
                     <Link to='/sign-up'>Don't have an account? Sign Up</Link>
                     {this.props.error}
                 </form>
+                <AuthModal {...this.props} path='/dashboard' open={this.state.isOpen} signUp={false}/>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({error, loggingIn}) => ({
+const mapStateToProps = ({error, loggingIn, loggedIn}) => ({
     error,
-    loggingIn
+    loggingIn,
+    loggedIn
 });
 
 export default connect(mapStateToProps, { login })(Login);

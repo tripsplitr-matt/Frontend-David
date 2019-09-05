@@ -1,0 +1,89 @@
+.dashboard 
+    width: 80%
+    margin: 0 auto
+    .subnavbar 
+        display: flex
+        justify-content: space-between
+        background: $fifth-color
+        align-items: center
+        padding: 10px 0
+        margin: 100px auto 0s
+        height: 40px
+        color: $third-color
+        a 
+            text-decoration: none
+            color: $third-color
+            padding: 18px
+        .show 
+            a:first-child
+                margin-left: 5px
+        a:hover
+            color: $fifth-color
+            background: $third-color
+        .header 
+            display: flex
+            justify-content: space-between
+            align-items: center
+            color: $third-color
+    .subContainer 
+        display: flex
+
+    .summary-content 
+        display: flex
+        align-items: flex-start
+        flex-wrap: wrap
+        width: 70%
+
+    .summary-card 
+        position: relative
+        background: $fourth-color
+        padding: 20px
+        width: 35%
+        margin-right: 60px
+        color: $secondary-color
+        ul 
+            list-style: none
+            padding-left: 0
+
+    .card:before, .card:after 
+        z-index: -1
+        position: absolute
+        content: ""
+        bottom: 25px
+        left: 10px
+        width: 50%
+        top: 80%
+        max-width: 300px
+        background: #777
+        -webkit-box-shadow: 0 35px 20px #777
+        -moz-box-shadow: 0 35px 20px #777
+        box-shadow: 0 35px 20px #777
+        -webkit-transform: rotate(-8deg)
+        -moz-transform: rotate(-8deg)
+        -o-transform: rotate(-8deg)
+        -ms-transform: rotate(-8deg)
+        transform: rotate(-8deg)
+
+    .card:after 
+        -webkit-transform: rotate(8deg)
+        -moz-transform: rotate(8deg)
+        -o-transform: rotate(8deg)
+        -ms-transform: rotate(8deg)
+        transform: rotate(8deg)
+        right: 10px
+        left: auto
+
+    .balances 
+        display: flex
+        justify-content: center
+        width: 30%
+        flex-direction: column
+        align-items: flex-end
+
+    .user-balance, .trips-balance 
+        position: relative
+        background: $fourth-color
+        padding: 20px
+        width: 80%
+        margin-bottom: 50px
+        color: $secondary-color

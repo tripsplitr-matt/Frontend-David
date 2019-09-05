@@ -14,7 +14,7 @@ const initialState = {
     addingTrip: false,
     addExpense: false,
     fetchingData: false,
-    token: localStorage.getItem('token'),
+    token: '',
     error: ''
 }
 
@@ -42,13 +42,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signingUp: true
             }
-        case SIGNUP_SUCCESS: 
+        case SIGNUP_SUCCESS:
             return {
                 ...state,
                 signedUp: true,
                 signingUp: false,
             }
-        case SIGNUP_FAIL: 
+        case SIGNUP_FAIL:
             return {
                 ...state,
                 signingUp: false,
@@ -85,8 +85,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 completedTrips: action.payload
             }
-        case ADD_TRIP_START: 
-            return {        
+        case ADD_TRIP_START:
+            return {
                 ...state,
                 addingTrip: true,
             }
@@ -102,8 +102,8 @@ const reducer = (state = initialState, action) => {
                 addingTrip: false,
                 error: action.payload
             }
-        case UPDATE_TRIP_START: 
-            return {        
+        case UPDATE_TRIP_START:
+            return {
                 ...state,
                 updatingTrip: true,
             }
@@ -119,8 +119,8 @@ const reducer = (state = initialState, action) => {
                 updatingTrip: false,
                 error: action.payload
             }
-        case DELETE_TRIP_START: 
-            return {        
+        case DELETE_TRIP_START:
+            return {
                 ...state,
                 deletingTrip: true,
             }
@@ -136,7 +136,7 @@ const reducer = (state = initialState, action) => {
                 deletingTrip: false,
                 error: action.payload
             }
-        case ADD_EXPENSE_START: 
+        case ADD_EXPENSE_START:
             return {
                 ...state,
                 addExpense: true,
