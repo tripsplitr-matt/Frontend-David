@@ -1,16 +1,18 @@
 import React from 'react'
-import { Route, Redirect, withRouter } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import checkToken from './CheckToken'
+import NotLogin from '../Modal/NotLogin'
 
 const PrivateRoute = ({ component: Component, token, errorStatusCode, ...rest }) => {
     return (
         <Route 
             {...rest}  
             render={props =>
-                token ? ( 
+                checkToken(localStorage.token) ? (
                     <Component {...props} /> 
-                ) : ( 
-                    <Redirect to='/' /> 
+                    ) : ( 
+                    <NotLogin {...props} open={true}/>                    
                 )}
         />
     )

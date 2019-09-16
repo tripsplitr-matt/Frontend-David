@@ -1,4 +1,4 @@
-import { LOGIN_START, SIGNUP_START, LOGIN_SUCCESS, FETCH_DATA_START, FETCH_USERS, FETCH_TRIPS, FETCH_EXPENSES, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAIL, FETCH_DATA_FAILURE, FETCH_COMPLETED_TRIPS, ADD_TRIP_START, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, UPDATE_TRIP_START, UPDATE_TRIP_SUCCESS, UPDATE_TRIP_FAIL, DELETE_TRIP_START, DELETE_TRIP_SUCCESS, DELETE_TRIP_FAIL, ADD_EXPENSE_START, ADD_EXPENSE_SUCESS, ADD_EXPENSE_FAIL } from "../actions";
+import { LOGOUT, LOGIN_START, SIGNUP_START, LOGIN_SUCCESS, FETCH_DATA_START, FETCH_USERS, FETCH_TRIPS, FETCH_EXPENSES, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAIL, FETCH_DATA_FAILURE, FETCH_COMPLETED_TRIPS, ADD_TRIP_START, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL, UPDATE_TRIP_START, UPDATE_TRIP_SUCCESS, UPDATE_TRIP_FAIL, DELETE_TRIP_START, DELETE_TRIP_SUCCESS, DELETE_TRIP_FAIL, ADD_EXPENSE_START, ADD_EXPENSE_SUCESS, ADD_EXPENSE_FAIL } from "../actions";
 
 const initialState = {
     users: [],
@@ -23,7 +23,8 @@ const reducer = (state = initialState, action) => {
         case LOGIN_START:
             return {
                 ...state,
-                loggingIn: true
+                loggingIn: true,
+                error: ''
             }
         case LOGIN_SUCCESS:
             return {
@@ -40,7 +41,8 @@ const reducer = (state = initialState, action) => {
         case SIGNUP_START:
             return {
                 ...state,
-                signingUp: true
+                signingUp: true,
+                error: ''
             }
         case SIGNUP_SUCCESS:
             return {
@@ -54,10 +56,23 @@ const reducer = (state = initialState, action) => {
                 signingUp: false,
                 error: action.payload
             }
+        case LOGOUT:
+            return {
+                ...state,
+                loggedIn: false,
+                token: '',
+                error: '',
+                fetchingData: false,
+                completedTrips: [],
+                expenses: [],
+                trips: [],
+                signedUp: false
+            }
         case FETCH_DATA_START:
             return {
                 ...state,
                 fetchingData: true,
+                error: ''
             }
         case FETCH_DATA_FAILURE:
             return {
@@ -68,7 +83,8 @@ const reducer = (state = initialState, action) => {
         case FETCH_USERS:
             return {
                 ...state,
-                users: action.payload
+                users: action.payload,
+                error: ''
             }
         case FETCH_TRIPS:
             return {
@@ -89,6 +105,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 addingTrip: true,
+                error: ''
             }
         case ADD_TRIP_SUCCESS:
             return {
@@ -106,6 +123,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 updatingTrip: true,
+                error: ''
             }
         case UPDATE_TRIP_SUCCESS:
             return {
@@ -123,6 +141,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 deletingTrip: true,
+                error: ''
             }
         case DELETE_TRIP_SUCCESS:
             return {
@@ -140,6 +159,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 addExpense: true,
+                error: ''
             }
         case ADD_EXPENSE_SUCESS:
             return {

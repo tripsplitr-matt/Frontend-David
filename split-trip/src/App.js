@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/NavBar'
 import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
 import { NewTrip, Dashboard, PastTrips, AllTrips, CurrentTrips } from './components/Dashboard'
-import PrivateRoute from './components/PrivateRoute' 
+import PrivateRoute from './components/Auth/PrivateRoute' 
 
 function App() {
   return (

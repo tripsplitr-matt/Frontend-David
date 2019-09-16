@@ -5,35 +5,40 @@ import { getUsers, getTrips, getExpenses } from '../../store/actions'
 import Subnavbar from './Subnavbar'
 import SummaryCard from './SummaryCard'
 import moment from 'moment'
+import jwtdecode from 'jwt-decode'
 
 const today = moment().format('MMMM Do YYYY')
 const currentUser = localStorage.getItem('currentUser')
 
 class Dashboard extends React.Component {
 
-    componentDidMount() {
-        this.props.getUsers()
-        this.props.getTrips()
-        this.props.getExpenses()
-        console.log(this.props.trips.length)
+    async componentWillMount() {
+        await this.props.getUsers()
+        await this.props.getTrips()
+        await this.props.getExpenses()
     }
 
     displayTrips = () => {
-        if(this.props.trips.length == 0) {
+        let userId = jwtdecode(localStorage.token).subject
+        let userTrips = this.props.trips.filter(trip => {
+            if(userId === trip.user_id) {
+                return trip
+            }
+        })
+        if(userTrips.length === 0) {
             return (<h3>Make new trips</h3>)
         } else {
-            return (this.props.trips.map(trip => {
+            return (userTrips.map(trip => {
                 return <SummaryCard data={trip} key={trip.id}/>
             }))
         }
     }
 
     render() {
-        console.log(this.props.trips)
         return (
             <div className='dashboard'>
                 <Subnavbar />
-                <div className='container'>
+                <div>
                     <div className='header'>
                         <h2>Welcome, {currentUser}</h2>
                         <h3>{today}</h3>

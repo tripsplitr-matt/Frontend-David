@@ -9,7 +9,7 @@ export default function AuthModal(props) {
     }
     return (
         <div>
-            <Modal isOpen={props.open} >
+            <Modal isOpen={props.open} style={{textAlign: 'center'}}>
                 <ModalBody>
                     {props.signUp ? 'Sign up was successful, please login' : 'Log in Successful, Welcome'}
                 </ModalBody>

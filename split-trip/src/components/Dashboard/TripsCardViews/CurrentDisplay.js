@@ -7,13 +7,13 @@ class CurrentDisplay extends React.Component {
         console.log(this.props)
         return (
             <div className='trips-card card'>
-                <h3></h3>    
+                {/* <h3></h3>    
                 <ul>
                     <li></li>
                     <li></li>
                     <li></li>
                 </ul>
-                <button></button>
+                <button></button> */}
             </div>
         )
     }
