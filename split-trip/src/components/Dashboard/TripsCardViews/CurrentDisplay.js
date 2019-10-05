@@ -6,7 +6,7 @@ const CurrentDisplay = props => {
     return (
         <div className='trip-card card'>
             <h3>{props.data.name}</h3>    
-            <img src={props.data.img} />
+            <img src={props.data.img} alt={props.data.name}/>
             <ul>
                 <li>{props.data.date}</li>
                 <li>${props.data.base_cost}</li>

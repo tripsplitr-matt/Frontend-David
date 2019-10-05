@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner } from 'reactstrap' 
+import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTrip } from '../../../store/actions'
 import NewTripModal from '../../Modal/NewTripModal'
@@ -16,7 +16,6 @@ class NewTrip extends React.Component {
             user_id: localStorage.user_id
         },
         isOpen: false,
-        status: false
     }
 
     handleChanges = e => {
@@ -28,22 +27,12 @@ class NewTrip extends React.Component {
         })
     }
 
-    addTrip = async e => {
+    addTrip = async(e) => {
         e.preventDefault()
         await this.props.addTrip(this.state.newTrip)
-        if(this.props.tripAdded) {
-            console.log(this.state.isOpen)
-            this.setState({
-                isOpen: true,
-                status: true
-            })
-            console.log(this.state.isOpen)
-        } else {
-            this.setState({
-                isOpen: true,
-                status: false
-            })
-        }
+        this.setState({
+            isOpen: true
+        })
     }
 
     render() {
@@ -57,11 +46,11 @@ class NewTrip extends React.Component {
                     <input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
                     {this.props.addingTrip ? (
                         <Spinner color='primary' className='spinner' />
-                    ) : ( 
-                        <button>Submit</button>
-                    )}
+                    ) : (
+                            <button>Submit</button>
+                        )}
                 </form>
-                <NewTripModal {...this.props} open={this.state.isOpen} status={this.state.status} />
+                <NewTripModal {...this.props} open={this.state.isOpen} status={this.props.tripAdded} />
             </div>
         )
     }
