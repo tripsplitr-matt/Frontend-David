@@ -1,32 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Login, SignUp, Main } from './views'
 import NavBar from './components/NavBar/NavBar'
-import Login from './components/Login/Login'
-import SignUp from './components/SignUp/SignUp'
-// import Welcome from './components/Welcome/Welcome'
-import NewTrip from './components/Dashboard/Addnewtrip/NewTrip';
-import Dashboard from './components/Dashboard/Dashboard'
-import PastTrips from './components/Dashboard/PastTrips/PastTrips'
-import AllTrips from './components/Dashboard/AllTrips/AllTrips'
-import CurrentTrips from './components/Dashboard/CurrentTrips/CurrentTrips'
-import PrivateRoute from './components/PrivateRoute' 
-import './styles/App.css';
+import PrivateRoute from './components/Auth/PrivateRoute'
 
+class App extends React.Component {
 
-function App() {
-  return (
-    <Router>
-        <NavBar />
-        {/* <Route exact path='/' render={props => <Welcome {...props} />}/> */}
-        <Route exact path='/' render={props => <Login {...props} />}/>
-        <Route path='/sign-up' render={props => <SignUp {...props} />}/>
-        <PrivateRoute exact path='/dashboard' component={Dashboard}/>
-        <PrivateRoute path='/dashboard/new-trip' component={NewTrip} />
-        <PrivateRoute path='/dashboard/all' component={AllTrips}/>
-        <PrivateRoute path='/dashboard/current'  component={CurrentTrips} />
-        <PrivateRoute path='/dashboard/past' component={PastTrips}/>
-    </Router>
-  );
+  state = {
+    loggedIn: false
+  }
+
+  handleNav = auth => {
+    this.setState({
+      loggedIn: auth
+    })
+  }
+
+  render() {
+    return (
+      <Router>
+        <NavBar log={this.state.loggedIn} handleNav={this.handleNav} />
+        <Route exact path='/' render={props => <Login {...props} handleNav={this.handleNav} />} />
+        <Route path='/sign-up' render={props => <SignUp {...props} />} />
+        <PrivateRoute path='/dashboard' component={Main} />
+      </Router>
+    )
+  }
 }
 
 export default App;

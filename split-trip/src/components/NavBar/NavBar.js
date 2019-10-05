@@ -1,28 +1,36 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import UserSettings from './UserSettings'
+import { logout } from '../../store/actions/index'
 
-class NavBar extends React.Component { 
+class NavBar extends React.Component {
+
+    logout = () => {
+        this.props.handleNav(false)
+        this.props.logout()
+        this.props.history.push('/')
+    }
 
     render() {
-        return(
-            console.log(this.props.loggedIn),
-            <div className='nav-bar'>
+        return (
+            <div className={localStorage.token ? 'nav-bar loggedIn' : 'nav-bar'}>
                 <div>
-                    <NavLink className='nav-brand' to='/'>TripSplitr</NavLink>
+                    <NavLink className='nav-brand' to='/'>Trip/Splitr</NavLink>
                 </div>
-                <div>
-                    <NavLink to={this.props.loggedIn ? '/dashboard' : '/'}>{this.props.loggedIn ? 'Dashboard' : 'Home'}</NavLink>
-                    <NavLink to={this.props.loggedIn ? '/' : '/sign-up'}>{this.props.loggedIn ? 'Logout' : 'Sign Up'}</NavLink>
-                </div>
+                {localStorage.token ? (
+                    <div>
+                        <NavLink className='rightSide' to='/dashboard'>Dashboard</NavLink>
+                        <NavLink onClick={this.logout} >Logout</NavLink>
+                    </div>
+                ) : (
+                        '' 
+                    )}
             </div>
         )
     }
 }
 
-const mapPropsToState = ({ loggedIn }) => ({
-    loggedIn
-})
+const mapStateToProps = ''
 
-export default connect(mapPropsToState)(NavBar);
+export default withRouter(connect(mapStateToProps, { logout })(NavBar))

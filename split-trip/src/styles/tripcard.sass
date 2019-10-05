@@ -1,0 +1,39 @@
+.trip-card:before, .trip-card:after 
+    z-index: -1
+    position: absolute
+    content: ""
+    width: 50%
+    max-width: 300px
+    top: 80%
+    bottom: 25px
+    left: 10px
+    box-shadow: 0 35px 20px #777
+    transform: rotate(-8deg)
+    -webkit-box-shadow: 0 35px 20px #777
+    -moz-box-shadow: 0 35px 20px #777
+    -webkit-transform: rotate(-8deg)
+    -moz-transform: rotate(-8deg)
+    -o-transform: rotate(-8deg)
+    -ms-transform: rotate(-8deg)
+.trip-card:after 
+    transform: rotate(8deg)
+    -webkit-transform: rotate(8deg)
+    -moz-transform: rotate(8deg)
+    -o-transform: rotate(8deg)
+    -ms-transform: rotate(8deg)
+    right: 10px
+    left: auto
+.trip-card
+    position: relative
+    width: 35%
+    padding: 20px
+    margin-right: 60px
+    color: $primary-color 
+    background: $fifth-color !important
+    border: none
+    ul 
+        list-style: none
+        padding-left: 0
+    img
+        width: 100%
+        height: auto
