@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
-import { login } from '../../store/actions'
-import AuthModal from '../Modal/AuthModal'
+import { login } from '../store/actions'
+import AuthModal from '../components/Modal/AuthModal'
 
 class Login extends React.Component {
     state = {
@@ -27,6 +27,7 @@ class Login extends React.Component {
         e.preventDefault();
         await this.props.login(this.state.credentials)
         if(this.props.loggedIn) {
+            this.props.handleNav(true)
             this.setState({
                 ...this.state,
                 isOpen: true
@@ -55,6 +56,6 @@ const mapStateToProps = ({error, loggingIn, loggedIn}) => ({
     error,
     loggingIn,
     loggedIn
-});
+})
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login })(Login)

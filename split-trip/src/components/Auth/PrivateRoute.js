@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import checkToken from './CheckToken'
 import NotLogin from '../Modal/NotLogin'
@@ -23,4 +23,4 @@ const mapStateToProps = ({ token, errorStatusCode }) => ({
     errorStatusCode
 })
 
-export default withRouter(connect(mapStateToProps, {})(PrivateRoute));
+export default connect(mapStateToProps, {})(PrivateRoute)

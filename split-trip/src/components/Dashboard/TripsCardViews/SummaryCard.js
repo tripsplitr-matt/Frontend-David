@@ -1,13 +1,11 @@
 import React from 'react'
 
-const SummaryCard  = props => {
-    console.log(props.data)
+const SummaryCard = props => {
     return (
-        <div className='summary-card card'>
+        <div className='trip-card'>
             <h3>{props.data.name}</h3>
             <ul>
                 <li>{props.data.date}</li>
-                {/* <li>Cost</li> */}
             </ul>
         </div>
     )

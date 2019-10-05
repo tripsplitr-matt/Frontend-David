@@ -14,7 +14,6 @@ export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios.post(`${link}/auth/login`, creds)
         .then(res => {
-            localStorage.setItem('currentUser', creds.username)
             localStorage.setItem('token', res.data.token);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data.token})
         })
@@ -37,57 +36,64 @@ export const register = newUser => dispatch => {
 export const logout = () => dispatch => {
     dispatch({ type: LOGOUT })
     localStorage.removeItem('token')
-    localStorage.removeItem('currentUser')
+    localStorage.removeItem('username')
+    localStorage.removeItem('user_id')
 }
 
-export const FETCH_DATA_START = 'FETCH_DATA_START'
-export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
-export const FETCH_TRIPS = 'FETCH_TRIPS'
-export const FETCH_EXPENSES = 'FETCH_EXPENSES'
-export const FETCH_USERS = 'FETCH_USERS'
-export const FETCH_COMPLETED_TRIPS = 'FETCH_COMPLETED_TRIPS'
+export const FETCH_USERS_START = 'FETCH_USERS_START'
+export const FETCH_TRIPS_START = 'FETCH_TRIPS_START'
+export const FETCH_EXPENSES_START = 'FETCH_EXPENSES_START'
+export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE'
+export const FETCH_EXPENSES_FAILURE = 'FETCH_EXPENSES_FAILURE'
+export const FETCH_TRIPS_FAILURE = 'FETCH_TRIPS_FAILURE'
+export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS'
+export const FETCH_EXPENSES_SUCCESS = 'FETCH_EXPENSES_SUCCESS'
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
+export const FETCH_COMPLETED_TRIPS_START = 'FETCH_COMPLETED_TRIPS_START'
+export const FETCH_COMPLETED_TRIPS_SUCCESS = 'FETCH_COMPLETED_TRIPS_SUCCESS'
+export const FETCH_COMPLETED_TRIPS_FAILURE = 'FETCH_COMPLETED_TRIPS_FAILURE'
 
 export const getUsers = () => dispatch => {
-    dispatch({ type: FETCH_DATA_START})
+    dispatch({ type: FETCH_USERS_START})
     axios.get(`${link}/users`)
         .then(res => {
-            dispatch({ type: FETCH_USERS, payload: res.data})
+            dispatch({ type: FETCH_USERS_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+            dispatch({ type: FETCH_USERS_FAILURE, payload: err})
         })
 }
 
 export const getTrips = () => dispatch => {
-    dispatch({ type: FETCH_DATA_START})
+    dispatch({ type: FETCH_TRIPS_START})
     axios.get(`${link}/trips`)
         .then(res => {
-            dispatch({ type: FETCH_TRIPS, payload: res.data})
+            dispatch({ type: FETCH_TRIPS_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+            dispatch({ type: FETCH_TRIPS_FAILURE, payload: err})
         })
 }
 
 export const getCompletedTrips = () => dispatch => {
-    dispatch({ type: FETCH_DATA_START})
+    dispatch({ type: FETCH_COMPLETED_TRIPS_START})
     axios.get(`${link}/trips/complete`)
         .then(res => {
-            dispatch({ type: FETCH_COMPLETED_TRIPS, payload: res.data})
+            dispatch({ type: FETCH_COMPLETED_TRIPS_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.message})
+            dispatch({ type: FETCH_COMPLETED_TRIPS_FAILURE, payload: err})
         })
 }
 
 export const getExpenses = () => dispatch => {
-    dispatch({ type: FETCH_DATA_START})
+    dispatch({ type: FETCH_EXPENSES_START})
     axios.get(`${link}/expenses`)
         .then(res => {
-            dispatch({ type: FETCH_EXPENSES, payload: res.data})
+            dispatch({ type: FETCH_EXPENSES_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.error})
+            dispatch({ type: FETCH_EXPENSES_FAILURE, payload: err})
         })
 }
 
@@ -99,12 +105,10 @@ export const addTrip = newTrip => dispatch => {
     dispatch({ type: ADD_TRIP_START })
     axios.post(`${link}/trips`, newTrip)
         .then(res => {
-            console.log(res)
             dispatch({ type: ADD_TRIP_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            console.log(err)
-            // dispatch({ type: ADD_TRIP_FAIL, payload: err.response.message})
+            dispatch({ type: ADD_TRIP_FAIL, payload: err })
         })
 }
 

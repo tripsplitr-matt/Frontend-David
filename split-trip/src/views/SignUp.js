@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { register } from '../../store/actions'
+import { register } from '../store/actions'
 import { Spinner } from 'reactstrap'
-import AuthModal from '../Modal/AuthModal'
+import AuthModal from '../components/Modal/AuthModal'
 
 class SignUp extends React.Component {
     state = {

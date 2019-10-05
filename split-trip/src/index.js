@@ -6,12 +6,17 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import reducer from './store/reducers/index'
 import App from './App'
+import checkToken from './components/Auth/CheckToken'
 import './styles/index.sass'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const devTool = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
 const store = createStore(reducer, devTool(applyMiddleware(thunk, logger)))
+
+if(localStorage.token) {
+    checkToken(localStorage.token)
+}
 
 ReactDOM.render(
 <Provider store={store}>

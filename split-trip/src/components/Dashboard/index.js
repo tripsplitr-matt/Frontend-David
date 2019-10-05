@@ -1,11 +1,7 @@
-import { CurrentDisplay, TripsCard, UpdateTrip } from './TripsCardViews'
-import AllTrips from './AllTrips'
-import CurrentTrips from './CurrentTrips'
-import NewTrip from './NewTrip'
+import { CurrentDisplay, TripsCard, UpdateTrip, SummaryCard } from './TripsCardViews'
+import { AllTrips, CurrentTrips, NewTrip, CompletedTrips} from './Selection'
 import Dashboard from './Dashboard'
-import PastTrips from './PastTrips'
 import Subnavbar from './Subnavbar'
-import SummaryCard from './SummaryCard'
 
 export {
     CurrentDisplay,
@@ -15,7 +11,7 @@ export {
     CurrentTrips,
     NewTrip,
     Dashboard,
-    PastTrips,
+    CompletedTrips,
     Subnavbar,
     SummaryCard
 }
