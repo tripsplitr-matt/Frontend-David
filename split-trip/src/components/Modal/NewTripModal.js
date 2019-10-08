@@ -7,6 +7,7 @@ function NewTripModal(props) {
         let url = path
         if(path === undefined) url = ''
         props.history.push(`/dashboard/${url}`)
+        window.location.reload()
     }
     return (
         <div className='newTripModal'>

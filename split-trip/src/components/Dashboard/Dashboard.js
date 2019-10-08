@@ -10,9 +10,9 @@ class Dashboard extends React.Component {
         trips: []
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setState({
-            trips: this.props.handleData()
+            trips: await this.props.handleData()
         })
     }
 
@@ -34,13 +34,13 @@ class Dashboard extends React.Component {
                         }
                     </div>
                     <div className='balances'>
-                        <div className='user-balance trip-card'>
+                        {/* <div className='user-balance trip-card'>
                             <h3>User Balances</h3>
                             <ul>
                                 <li>Spent</li>
                                 <li>Received</li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className='trips-balance trip-card'>
                             <h3>Trip Balances</h3>
                             <ul>

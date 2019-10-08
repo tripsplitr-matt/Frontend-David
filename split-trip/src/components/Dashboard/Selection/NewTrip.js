@@ -28,11 +28,13 @@ class NewTrip extends React.Component {
     }
 
     addTrip = async(e) => {
-        e.preventDefault()
+        e.preventDefault();
         await this.props.addTrip(this.state.newTrip)
-        this.setState({
-            isOpen: true
-        })
+        if(this.props.addTrip) {
+            this.setState({
+                isOpen: true
+            })
+        }
     }
 
     render() {
