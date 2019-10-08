@@ -41,17 +41,8 @@ export const logout = () => dispatch => {
 }
 
 export const FETCH_USERS_START = 'FETCH_USERS_START'
-export const FETCH_TRIPS_START = 'FETCH_TRIPS_START'
-export const FETCH_EXPENSES_START = 'FETCH_EXPENSES_START'
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE'
-export const FETCH_EXPENSES_FAILURE = 'FETCH_EXPENSES_FAILURE'
-export const FETCH_TRIPS_FAILURE = 'FETCH_TRIPS_FAILURE'
-export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS'
-export const FETCH_EXPENSES_SUCCESS = 'FETCH_EXPENSES_SUCCESS'
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
-export const FETCH_COMPLETED_TRIPS_START = 'FETCH_COMPLETED_TRIPS_START'
-export const FETCH_COMPLETED_TRIPS_SUCCESS = 'FETCH_COMPLETED_TRIPS_SUCCESS'
-export const FETCH_COMPLETED_TRIPS_FAILURE = 'FETCH_COMPLETED_TRIPS_FAILURE'
 
 export const getUsers = () => dispatch => {
     dispatch({ type: FETCH_USERS_START})
@@ -64,6 +55,10 @@ export const getUsers = () => dispatch => {
         })
 }
 
+export const FETCH_TRIPS_START = 'FETCH_TRIPS_START'
+export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS'
+export const FETCH_TRIPS_FAILURE = 'FETCH_TRIPS_FAILURE'
+
 export const getTrips = () => dispatch => {
     dispatch({ type: FETCH_TRIPS_START})
     axios.get(`${link}/trips`)
@@ -75,6 +70,25 @@ export const getTrips = () => dispatch => {
         })
 }
 
+export const FETCH_TRIP_START = 'FETCH_TRIP_START'
+export const FETCH_TRIP_SUCCESS = 'FETCH_TRIP_SUCCESS'
+export const FETCH_TRIP_FAILURE = 'FETCH_TRIP_FAILURE'
+
+export const getTripById = id => dispatch => {
+    dispatch({ type: FETCH_TRIP_START })
+    axios.get(`${link}/trips/${id}`)
+        .then(res => {
+            dispatch({ type: FETCH_TRIP_SUCCESS, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({ type: FETCH_TRIP_FAILURE, payload: err})
+        })
+}
+
+export const FETCH_COMPLETED_TRIPS_START = 'FETCH_COMPLETED_TRIPS_START'
+export const FETCH_COMPLETED_TRIPS_SUCCESS = 'FETCH_COMPLETED_TRIPS_SUCCESS'
+export const FETCH_COMPLETED_TRIPS_FAILURE = 'FETCH_COMPLETED_TRIPS_FAILURE'
+
 export const getCompletedTrips = () => dispatch => {
     dispatch({ type: FETCH_COMPLETED_TRIPS_START})
     axios.get(`${link}/trips/complete`)
@@ -85,6 +99,10 @@ export const getCompletedTrips = () => dispatch => {
             dispatch({ type: FETCH_COMPLETED_TRIPS_FAILURE, payload: err})
         })
 }
+
+export const FETCH_EXPENSES_START = 'FETCH_EXPENSES_START'
+export const FETCH_EXPENSES_SUCCESS = 'FETCH_EXPENSES_SUCCESS'
+export const FETCH_EXPENSES_FAILURE = 'FETCH_EXPENSES_FAILURE'
 
 export const getExpenses = () => dispatch => {
     dispatch({ type: FETCH_EXPENSES_START})

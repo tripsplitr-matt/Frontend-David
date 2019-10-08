@@ -12,6 +12,9 @@ import {
     FETCH_TRIPS_START, 
     FETCH_TRIPS_SUCCESS, 
     FETCH_TRIPS_FAILURE, 
+    FETCH_TRIP_START,
+    FETCH_TRIP_SUCCESS,
+    FETCH_TRIP_FAILURE,
     FETCH_EXPENSES_START, 
     FETCH_EXPENSES_SUCCESS, 
     FETCH_EXPENSES_FAILURE,  
@@ -34,6 +37,7 @@ import {
 const initialState = {
     users: [],
     trips: [],
+    currenttrip: [],
     completedTrips: [],
     expenses: [],
     loggingIn: false,
@@ -140,6 +144,25 @@ const reducer = (state = initialState, action) => {
                 fetchingTrips:false,
                 error: action.payload
             }
+        case FETCH_TRIP_START: 
+            return {
+                ...state,
+                fetchingTrips: true,
+                currenttrip: [],
+                error: '',
+            }
+        case FETCH_TRIP_SUCCESS: 
+            return {
+                ...state,
+                fetchingTrips: false,
+                currenttrip: action.payload
+            }
+        case FETCH_TRIP_FAILURE: 
+            return {
+                ...state,
+                fetchingTrips: false,
+                error: action.payload
+            }
         case FETCH_EXPENSES_START:
             return {
                 ...state,
@@ -181,6 +204,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addingTrip: true,
                 tripAdded: false,
+                currenttrip: [],
                 error: ''
             }
         case ADD_TRIP_SUCCESS:
@@ -188,7 +212,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addingTrip: false,
                 tripAdded: true,
-                trips: action.payload
+                currenttrip: action.payload
             }
         case ADD_TRIP_FAIL:
             return {

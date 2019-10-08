@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getTrips, getExpenses } from '../store/actions'
+import { getTrips, getExpenses, getTripById } from '../store/actions'
 import { Subnavbar, Dashboard, NewTrip, AllTrips, CompletedTrips, CurrentTrips } from '../components/Dashboard'
 import { Spinner } from 'reactstrap'
+import TripView from './TripView'
 
 
 class Main extends Component {
@@ -32,6 +33,11 @@ class Main extends Component {
         }
     }
 
+    selectTrip = id => {
+        this.props.getTripById(id)
+        this.props.history.push(`/dashboard/trip/${id}`)
+    }
+
     render() {
         if (this.props.fetchingTrips || this.props.fetchingExpenses) {
             return (
@@ -43,22 +49,24 @@ class Main extends Component {
             return (
                 <div className='main'>
                     <Subnavbar />
-                    <Route exact path='/dashboard' render={props => <Dashboard {...props} handleData={this.handleData} />} />
+                    <Route exact path='/dashboard' render={props => <Dashboard {...props} handleData={this.handleData} selectTrip={this.selectTrip} trip={this.props.currenttrip}/>} />
                     <Route path='/dashboard/new-trip' render={props => <NewTrip {...props} />} />
-                    <Route path='/dashboard/all' render={props => <AllTrips {...props} handleData={this.handleData} />} />
-                    <Route path='/dashboard/current' render={props => <CurrentTrips {...props} handleData={this.handleData} />} />
-                    <Route path='/dashboard/completed' render={props => <CompletedTrips {...props} handleData={this.handleData} />} />
+                    <Route path='/dashboard/all' render={props => <AllTrips {...props} handleData={this.handleData} selectTrip={this.selectTrip} trip={this.props.currenttrip}/>} />
+                    <Route path='/dashboard/current' render={props => <CurrentTrips {...props} handleData={this.handleData} selectTrip={this.selectTrip} trip={this.props.currenttrip}/>} />
+                    <Route path='/dashboard/completed' render={props => <CompletedTrips {...props} handleData={this.handleData} selectTrip={this.selectTrip} trip={this.props.currenttrip}/>} />
+                    <Route path='/dashboard/trip/:id' render={props => <TripView {...props} trip={this.props.currenttrip} />}/>
                 </div>
             )
         }
     }
 }
 
-const mapStateToProps = ({ trips, expenses, fetchingTrips, fetchingExpenses }) => ({
+const mapStateToProps = ({ trips, expenses, fetchingTrips, fetchingExpenses, currenttrip }) => ({
     trips,
     expenses,
     fetchingTrips,
-    fetchingExpenses
+    fetchingExpenses,
+    currenttrip
 })
 
-export default connect(mapStateToProps, { getExpenses, getTrips })(Main)
+export default connect(mapStateToProps, { getExpenses, getTrips, getTripById })(Main)

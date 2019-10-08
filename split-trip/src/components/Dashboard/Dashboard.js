@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
                             <h2>No trips have been created</h2>
                         ) : 
                             this.state.trips.map(trip => {
-                                return <SummaryCard data={trip} key={trip.id} />
+                                return <SummaryCard data={trip} key={trip.id} selectTrip={this.props.selectTrip}/>
                             })
                         }
                     </div>

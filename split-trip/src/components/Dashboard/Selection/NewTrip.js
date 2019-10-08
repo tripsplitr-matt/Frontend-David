@@ -14,8 +14,7 @@ class NewTrip extends React.Component {
             complete: false,
             img: '',
             user_id: localStorage.user_id
-        },
-        isOpen: false,
+        }
     }
 
     handleChanges = e => {
@@ -30,11 +29,6 @@ class NewTrip extends React.Component {
     addTrip = async(e) => {
         e.preventDefault();
         await this.props.addTrip(this.state.newTrip)
-        if(this.props.addTrip) {
-            this.setState({
-                isOpen: true
-            })
-        }
     }
 
     render() {
@@ -44,7 +38,6 @@ class NewTrip extends React.Component {
                     <label>Add a New Trip</label>
                     <input value={this.state.newTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
                     <input value={this.state.newTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
-                    <input value={this.state.newTrip.base_cost} onChange={this.handleChanges} name='base_cost' type='number' placeholder='Cost' required />
                     <input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
                     {this.props.addingTrip ? (
                         <Spinner color='primary' className='spinner' />
@@ -52,16 +45,17 @@ class NewTrip extends React.Component {
                             <button>Submit</button>
                         )}
                 </form>
-                <NewTripModal {...this.props} open={this.state.isOpen} status={this.props.tripAdded} />
+                <NewTripModal {...this.props} open={this.props.tripAdded} status={this.props.tripAdded} trip={this.props.currenttrip}/>
             </div>
         )
     }
 }
 
-const mapPropsToState = ({ trips, addingTrip, error, tripAdded }) => ({
+const mapPropsToState = ({ trips, addingTrip, error, tripAdded, currenttrip }) => ({
     trips,
     addingTrip,
     tripAdded,
+    currenttrip,
     error
 })
 

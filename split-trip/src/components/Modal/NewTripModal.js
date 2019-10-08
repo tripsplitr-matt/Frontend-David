@@ -7,7 +7,6 @@ function NewTripModal(props) {
         let url = path
         if(path === undefined) url = ''
         props.history.push(`/dashboard/${url}`)
-        window.location.reload()
     }
     return (
         <div className='newTripModal'>
@@ -18,6 +17,11 @@ function NewTripModal(props) {
                 <ModalFooter>
                     <Button onClick={() => handleBtns(props)} color='primary' >Continue</Button>
                     <Button onClick={() => window.location.reload()} >{props.status ? 'Add another trip' : 'Try again'}</Button>
+                    {props.status ? (
+                        <Button onClick={() => handleBtns(props, `trip/${props.trip.id}`)}>Add Expenses</Button>
+                    ) : (
+                        ''
+                    )}
                 </ModalFooter>
             </Modal>
         </div>
