@@ -130,9 +130,9 @@ export const addTrip = newTrip => dispatch => {
         })
 }
 
-export const DELETE_TRIP_START = 'ADD_TRIP_START'
-export const DELETE_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
-export const DELETE_TRIP_FAIL = 'ADD_TRIP_FAIL'
+export const DELETE_TRIP_START = 'DELETE_TRIP_START'
+export const DELETE_TRIP_SUCCESS = 'DELETE_TRIP_SUCCESS'
+export const DELETE_TRIP_FAIL = 'DELETE_TRIP_FAIL'
 
 export const deleteTrip = id => dispatch => {
     dispatch({ type: DELETE_TRIP_START })
@@ -145,9 +145,9 @@ export const deleteTrip = id => dispatch => {
         })
 }
 
-export const UPDATE_TRIP_START = 'ADD_TRIP_START'
-export const UPDATE_TRIP_SUCCESS = 'ADD_TRIP_SUCCESS'
-export const UPDATE_TRIP_FAIL = 'ADD_TRIP_FAIL'
+export const UPDATE_TRIP_START = 'UPDATE_TRIP_START'
+export const UPDATE_TRIP_SUCCESS = 'UPDATE_TRIP_SUCCESS'
+export const UPDATE_TRIP_FAIL = 'UPDATE_TRIP_FAIL'
 
 export const updateTrip = trip => dispatch => {
     dispatch({ type: UPDATE_TRIP_START })
@@ -156,7 +156,8 @@ export const updateTrip = trip => dispatch => {
             dispatch({ type: UPDATE_TRIP_SUCCESS, payload: res.data})
         })
         .catch(err => {
-            dispatch({ type: UPDATE_TRIP_FAIL, payload: err.response.message})
+            dispatch({ type: UPDATE_TRIP_FAIL, payload: err})
+            console.log(trip.id)
         })
 }
 

@@ -11,9 +11,13 @@ class Dashboard extends React.Component {
     }
 
     async componentDidMount() {
-        this.setState({
-            trips: await this.props.handleData()
-        })
+        // console.log(this.props)
+        // console.log(this.props.trips)
+        // if (this.props.trips.length === 0) {
+            this.setState({
+                trips: await this.props.handleData()
+            })
+        // }
     }
 
     render() {
@@ -27,9 +31,9 @@ class Dashboard extends React.Component {
                     <div className='summary-content'>
                         {this.state.trips === null ? (
                             <h2>No trips have been created</h2>
-                        ) : 
+                        ) :
                             this.state.trips.map(trip => {
-                                return <SummaryCard data={trip} key={trip.id} selectTrip={this.props.selectTrip}/>
+                                return <SummaryCard data={trip} key={trip.id} selectTrip={this.props.selectTrip} />
                             })
                         }
                     </div>

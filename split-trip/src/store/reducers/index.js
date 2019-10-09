@@ -212,7 +212,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addingTrip: false,
                 tripAdded: true,
-                currenttrip: action.payload
+                currenttrip: action.payload,
+                trips: [...state.trips, action.payload]
             }
         case ADD_TRIP_FAIL:
             return {
@@ -230,7 +231,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 updatingTrip: false,
-                trips: action.payload
+                trips: [...state.trips, action.payload]
             }
         case UPDATE_TRIP_FAIL:
             return {

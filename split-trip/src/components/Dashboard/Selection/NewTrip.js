@@ -3,6 +3,7 @@ import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTrip } from '../../../store/actions'
 import NewTripModal from '../../Modal/NewTripModal'
+import { Form, Label, Button, Input } from 'reactstrap'
 
 class NewTrip extends React.Component {
 
@@ -33,18 +34,18 @@ class NewTrip extends React.Component {
 
     render() {
         return (
-            <div className='addTrip'>
-                <form onSubmit={this.addTrip}>
-                    <label>Add a New Trip</label>
-                    <input value={this.state.newTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
-                    <input value={this.state.newTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
-                    <input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
+            <div className='trip-form'>
+                <Form onSubmit={this.addTrip}>
+                    <Label>Add a New Trip</Label>
+                    <Input value={this.state.newTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
+                    <Input value={this.state.newTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
+                    <Input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
                     {this.props.addingTrip ? (
                         <Spinner color='primary' className='spinner' />
                     ) : (
-                            <button>Submit</button>
+                            <Button>Submit</Button>
                         )}
-                </form>
+                </Form>
                 <NewTripModal {...this.props} open={this.props.tripAdded} status={this.props.tripAdded} trip={this.props.currenttrip}/>
             </div>
         )

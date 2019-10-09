@@ -4,9 +4,10 @@ import { TripsCard } from '../components/Dashboard'
 class TripView extends Component {
 
     render () {
-        // console.log(this.props.currenttrip)
         return (
-            <TripsCard data={this.props.trip} />
+            <div className='tripView'>
+                <TripsCard {...this.props} data={this.props.trip} />
+            </div>
         )
     }
 }

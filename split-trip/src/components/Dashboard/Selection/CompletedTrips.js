@@ -20,7 +20,7 @@ const CompletedTrips = props => {
                 <h2>You currently do not have any completed trips</h2>
             ) : (
                     trips.map(trip => {
-                        return <TripsCard data={trip} />
+                        return <TripsCard data={trip} key={trip.id}/>
                     })
                 )}
         </div>

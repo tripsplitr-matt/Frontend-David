@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'reactstrap'
 
 const CurrentDisplay = props => {
     return (
@@ -13,7 +14,7 @@ const CurrentDisplay = props => {
                 <li>Completed: {props.completed === 0 ? (<FontAwesomeIcon icon={faCheck}/>) : (<FontAwesomeIcon icon={faTimes} />) } </li>
             </ul>
             {props.img  === '' ? (<img src={props.img} alt='trip' />) : ('')}
-            <button>Update Trip</button>
+            <Button onClick={() => props.handleBtn()}>Update Trip</Button>
         </div>
     )
 }
