@@ -1,8 +1,9 @@
 import React from 'react'
-import { Spinner } from 'reactstrap' 
+import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addTrip } from '../../../store/actions'
 import NewTripModal from '../../Modal/NewTripModal'
+import { Form, Label, Button, Input } from 'reactstrap'
 
 class NewTrip extends React.Component {
 
@@ -14,9 +15,7 @@ class NewTrip extends React.Component {
             complete: false,
             img: '',
             user_id: localStorage.user_id
-        },
-        isOpen: false,
-        status: false
+        }
     }
 
     handleChanges = e => {
@@ -28,49 +27,36 @@ class NewTrip extends React.Component {
         })
     }
 
-    addTrip = async e => {
-        e.preventDefault()
+    addTrip = async(e) => {
+        e.preventDefault();
         await this.props.addTrip(this.state.newTrip)
-        if(this.props.tripAdded) {
-            console.log(this.state.isOpen)
-            this.setState({
-                isOpen: true,
-                status: true
-            })
-            console.log(this.state.isOpen)
-        } else {
-            this.setState({
-                isOpen: true,
-                status: false
-            })
-        }
     }
 
     render() {
         return (
-            <div className='addTrip'>
-                <form onSubmit={this.addTrip}>
-                    <label>Add a New Trip</label>
-                    <input value={this.state.newTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
-                    <input value={this.state.newTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
-                    <input value={this.state.newTrip.base_cost} onChange={this.handleChanges} name='base_cost' type='number' placeholder='Cost' required />
-                    <input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
+            <div className='trip-form'>
+                <Form onSubmit={this.addTrip}>
+                    <Label>Add a New Trip</Label>
+                    <Input value={this.state.newTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
+                    <Input value={this.state.newTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
+                    <Input value={this.state.newTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
                     {this.props.addingTrip ? (
                         <Spinner color='primary' className='spinner' />
-                    ) : ( 
-                        <button>Submit</button>
-                    )}
-                </form>
-                <NewTripModal {...this.props} open={this.state.isOpen} status={this.state.status} />
+                    ) : (
+                            <Button>Submit</Button>
+                        )}
+                </Form>
+                <NewTripModal {...this.props} open={this.props.tripAdded} status={this.props.tripAdded} trip={this.props.currenttrip}/>
             </div>
         )
     }
 }
 
-const mapPropsToState = ({ trips, addingTrip, error, tripAdded }) => ({
+const mapPropsToState = ({ trips, addingTrip, error, tripAdded, currenttrip }) => ({
     trips,
     addingTrip,
     tripAdded,
+    currenttrip,
     error
 })
 

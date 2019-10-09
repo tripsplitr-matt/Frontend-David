@@ -10,10 +10,14 @@ class Dashboard extends React.Component {
         trips: []
     }
 
-    componentDidMount() {
-        this.setState({
-            trips: this.props.handleData()
-        })
+    async componentDidMount() {
+        // console.log(this.props)
+        // console.log(this.props.trips)
+        // if (this.props.trips.length === 0) {
+            this.setState({
+                trips: await this.props.handleData()
+            })
+        // }
     }
 
     render() {
@@ -27,20 +31,20 @@ class Dashboard extends React.Component {
                     <div className='summary-content'>
                         {this.state.trips === null ? (
                             <h2>No trips have been created</h2>
-                        ) : 
+                        ) :
                             this.state.trips.map(trip => {
-                                return <SummaryCard data={trip} key={trip.id} />
+                                return <SummaryCard data={trip} key={trip.id} selectTrip={this.props.selectTrip} />
                             })
                         }
                     </div>
                     <div className='balances'>
-                        <div className='user-balance trip-card'>
+                        {/* <div className='user-balance trip-card'>
                             <h3>User Balances</h3>
                             <ul>
                                 <li>Spent</li>
                                 <li>Received</li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className='trips-balance trip-card'>
                             <h3>Trip Balances</h3>
                             <ul>

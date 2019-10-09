@@ -13,10 +13,13 @@
             align-items: flex-start
             flex-wrap: wrap
             width: 70%
+        .summary-card
+            width: 30%
+            margin-bottom: 20px
         .balances 
             display: flex
             flex-direction: column
-            justify-content: center
+            justify-content: flex-start
             align-items: flex-end
             width: 30%
         .user-balance, .trips-balance 
@@ -26,7 +29,10 @@
             margin-right: 0
             margin-bottom: 50px
             background: $fifth-color
-            color: $primary-color
+            color: $primary-color 
 
-.allTrips, .completedTrips, .currentTrips 
+.allTrips, .completedTrips, .currentTrips, .tripView
     margin-top: 20px
+    display: flex
+    justify-content: center
+    flex-wrap: wrap

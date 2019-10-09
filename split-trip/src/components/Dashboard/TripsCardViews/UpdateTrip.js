@@ -1,14 +1,14 @@
 import React from 'react'
+import { Form, Label, Button, Input, FormGroup } from 'reactstrap'
 
-class UpdateTrip extends React.Component{
+class UpdateTrip extends React.Component {
 
     state = {
         updateTrip: {
-            name: '',
-            date: '',
-            base_cost: '',
-            complete: false,
-            img: ''
+            id: this.props.data.id,
+            name: this.props.data.name,
+            date: this.props.data.date,
+            img: this.props.data.img
         }
     }
 
@@ -23,21 +23,26 @@ class UpdateTrip extends React.Component{
 
     updateTrip = e => {
         e.preventDefault();
-        this.props.updateTrip(this.state.updateTrip)
-        
+        this.props.update(this.state.updateTrip)
+        // console.log(this.state.updateTrip)        
     }
 
-   render () {
+    render() {
         return (
-            <form onSubmit={this.updateTrip}>
-                <input value={this.state.updateTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required/>
-                <input value={this.state.updateTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required/>
-                <input value={this.state.updateTrip.base_cost} onChange={this.handleChanges} name='base_cost' type='number' placeholder='Cost' required/>
-                <input value={this.state.updateTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
-                <button>Submit</button>
-            </form>
+            <div className='trip-form'>
+                <Form onSubmit={this.updateTrip} className='update-form'>
+                    <Label>Update Trip</Label>
+                    <Input value={this.state.updateTrip.name} onChange={this.handleChanges} name='name' type='text' placeholder='Name of Trip' required />
+                    <Input value={this.state.updateTrip.date} onChange={this.handleChanges} name='date' type='date' placeholder='Date' required />
+                    <Input value={this.state.updateTrip.img} onChange={this.handleChanges} name='img' type='url' placeholder='Url Image' />
+                    <FormGroup>
+                        <Button onClick={() => this.props.handleBtn()}>Go Back</Button>
+                        <Button>Submit</Button>
+                    </FormGroup>
+                </Form>
+            </div>
         )
-   }
+    }
 }
 
 export default UpdateTrip

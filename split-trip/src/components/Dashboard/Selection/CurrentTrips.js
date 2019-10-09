@@ -20,7 +20,7 @@ const CurrentTrips = props => {
                 <h2>You currently do not have any current trips</h2>
             ) : (
                     trips.map(trip => {
-                        return <TripsCard data={trip} />
+                        return <TripsCard data={trip} key={trip.id}/>
                     })
                 )}
         </div>

@@ -9,7 +9,6 @@ class NavBar extends React.Component {
     logout = () => {
         this.props.handleNav(false)
         this.props.logout()
-        this.props.history.push('/')
     }
 
     render() {
@@ -21,7 +20,7 @@ class NavBar extends React.Component {
                 {localStorage.token ? (
                     <div>
                         <NavLink className='rightSide' to='/dashboard'>Dashboard</NavLink>
-                        <NavLink onClick={this.logout} >Logout</NavLink>
+                        <NavLink onClick={this.logout} to='/'>Logout</NavLink>
                     </div>
                 ) : (
                         '' 

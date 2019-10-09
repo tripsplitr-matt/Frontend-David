@@ -4,6 +4,7 @@ import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { login } from '../store/actions'
 import AuthModal from '../components/Modal/AuthModal'
+import checkToken from '../components/Auth/CheckToken'
 
 class Login extends React.Component {
     state = {
@@ -13,6 +14,14 @@ class Login extends React.Component {
         },
         isOpen: false
     }
+
+    componentDidMount () {
+        if(checkToken(localStorage.token)) {
+          this.props.history.push('/dashboard')
+        } else {
+          this.props.history.push('/')
+        }
+     }
 
     handleChanges = e => {
         this.setState({

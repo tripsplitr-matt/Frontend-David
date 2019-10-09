@@ -9,7 +9,7 @@ const AllTrips = props => {
                 <h2>No trips have been created</h2>
             ) : (
                 trips.map(trip => {
-                    return <TripsCard data={trip} />
+                    return <TripsCard data={trip} key={trip.id}/>
                 })
             )}
         </div>
